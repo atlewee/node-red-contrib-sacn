@@ -1,14 +1,19 @@
 {
   "name": "node-red-contrib-sacn",
   "version": "0.0.1",
-  "description": "sACN for NodeRed\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[Coutput \u001b[2~f\u001b[2~or Node-RED",
-  "main": "sACN.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "sACN for NodeRed",
+  "dependencies"  : {
+    "e131": "1.1.1"
+  },
+  "node-red"      : {
+    "nodes"     : {
+        "sacn": "sacn.js",
+        "sacn-config": "sacn-config.js"
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atlewee/node-red-contrib-sacn.git"
+    "url": "https://github.com/atlewee/node-red-contrib-sacn.git"
   },
   "keywords": [
     "sacn",
@@ -16,9 +21,5 @@
     "e1.31"
   ],
   "author": "Atlewee",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/atlewee/node-red-contrib-sacn/issues"
-  },
-  "homepage": "https://github.com/atlewee/node-red-contrib-sacn#readme"
+  "license": "MIT"
 }

@@ -4,16 +4,16 @@
         color: '#a6bbcf',
         defaults: {
             name: {value: ""},
-            address: {value: "127.0.0.1"},
-            size: {value: 512},
-            universe: {value: 1, validate:RED.validators.number()}
+            server: {value:"", type:"sacn-config"},
+            universe: {value: 1, validate:RED.validators.number()},
+            channel: {value: 1, validate:RED.validators.number()}
         },
         inputs: 1,
         outputs: 0,
         align: "right",
         icon: "light.png",
         label: function() {
-            return this.name || "sACN"
+            return this.name || "sACN/"+this.universe+"/"+this.channel
         }
     })
 </script>
@@ -24,16 +24,16 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-            <label for="node-input-address"><i class="fa fa-bookmark"></i> Address </label>
-            <input type="text" id="node-input-address" placeholder="IP Address">
-    </div>
-    <div class="form-row">
-            <label for="node-input-size"><i class="fa fa-tag"></i> Size </label>
-            <input type="text" id="node-input-size" placeholder="Channels">
+            <label for="node-input-server"><i class="fa fa-tag"></i> Server </label>
+            <input type="text" id="node-input-server" placeholder="Server">
     </div>
     <div class="form-row">
             <label for="node-input-universe"><i class="fa fa-tag"></i> Universe </label>
             <input type="text" id="node-input-universe" placeholder="Universe">
+    </div>
+    <div class="form-row">
+            <label for="node-input-channel"><i class="fa fa-bookmark"></i> Channel </label>
+            <input type="text" id="node-input-channel" placeholder="Channel">
     </div>
 </script>
 
