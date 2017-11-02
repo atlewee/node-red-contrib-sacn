@@ -16,6 +16,7 @@
     "url": "https://github.com/atlewee/node-red-contrib-sacn.git"
   },
   "keywords": [
+    "node-red",
     "sacn",
     "e131",
     "e1.31",
