@@ -65,5 +65,7 @@ msg.payload = {
 };
 ```
 
+Package is currently in rapid development, I will bump to 1.0.0 when considered ready for production use.
+
 Todo:
 - Fading/Transition

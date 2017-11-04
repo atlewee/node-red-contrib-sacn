@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-sacn",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "sACN for NodeRed",
   "dependencies"  : {
     "e131": "1.1.1"

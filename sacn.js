@@ -23,7 +23,6 @@ module.exports = function (RED) {
                     node.server.setWithBuckets(payload.universe, msg.payload.buckets)
                 } else {
                     node.server.setChannelValue(payload.universe, payload.channel, msg.payload)
-                    node.error(payload.universe + ":" + payload.channel)
                 }
             }
         })
