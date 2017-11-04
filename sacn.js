@@ -11,11 +11,10 @@ module.exports = function (RED) {
                 
                 payload.universe = msg.payload.universe || config.universe || parseInt(topic[0]) || 0
                 if (config.universe && !topic[1]) {
-                    payload.channel = msg.payload.channel || topic[0] || config.channel || 0
+                    payload.channel = msg.payload.channel || config.channel || parseInt(topic[0]) || 0
                 } else {
-                    payload.channel = msg.payload.channel || topic[1] || config.channel || 0
+                    payload.channel = msg.payload.channel || config.channel || parseInt(topic[1]) || 0
                 }
-                
 
                 if(Array.isArray(msg.payload.data)) {
                     payload.offset = msg.payload.offset || payload.channel

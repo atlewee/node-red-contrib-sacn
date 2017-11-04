@@ -8,7 +8,7 @@ Node-RED node that controls lights via sACN
 msg.payload = 0 // (int: value in [0,255])
 
 
-// Universe and channel can be overidden dynamically if you provide them in the topic:
+// Universe and channel can be set dynamically if not set in config:
 msg.topic = "1/1" // (string: Universe/Channel)
 msg.payload = 0
 
