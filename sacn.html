@@ -3,26 +3,24 @@
         category: 'output',
         color: '#a6bbcf',
         defaults: {
-            name: {value: ""},
             server: {value:"", type:"sacn-config"},
-            universe: {value: 1, validate:RED.validators.number()},
-            channel: {value: 1, validate:RED.validators.number()}
+            universe: {value: ""},
+            channel: {value: ""},
+            name: {value: ""}
         },
         inputs: 1,
         outputs: 0,
         align: "right",
         icon: "light.png",
         label: function() {
-            return this.name || "sACN/"+this.universe+"/"+this.channel
+            let universe = this.universe == "" ? "/#" : "/"+this.universe
+            let channel = this.channel == "" ? "/#" : "/"+this.channel
+            return this.name || "sACN" + universe + channel
         }
     })
 </script>
 
 <script type="text/x-red" data-template-name="sACN">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name </label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
     <div class="form-row">
             <label for="node-input-server"><i class="fa fa-tag"></i> Server </label>
             <input type="text" id="node-input-server" placeholder="Server">
@@ -34,6 +32,10 @@
     <div class="form-row">
             <label for="node-input-channel"><i class="fa fa-bookmark"></i> Channel </label>
             <input type="text" id="node-input-channel" placeholder="Channel">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name </label>
+        <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 

@@ -11,27 +11,39 @@ module.exports = function(RED) {
         node.client = new e131.Client(node.host,[node.port])
         node.packet = node.flowContext.get("packet") || []
 
-        node.set = function (universe, address, value) {
+        node.set = function (universe, channel, value) {
             if (!node.packet[universe]) {
-                node.error("packet for universe does not exist: " + universe)
                 node.packet[universe] = node.client.createPacket(512)
                 node.packet[universe].setUniverse(universe)
             }
-            if (address > 0) {
+            if (channel > 0) {
                 let slotsData = node.packet[universe].getSlotsData()
-                slotsData[address - 1] = value
+                slotsData[channel - 1] = value
                 node.packet[universe].setSlotsData(slotsData)
                 }
             }
         
         node.sendPacket = function (universe) {
-            node.error(universe)
             node.client.send(node.packet[universe])
+        }
+
+        node.setWithArray = function (universe, offset, data) {
+            for (i=0; i < data.length; i++) {
+                node.set(parseInt(universe), parseInt(offset)+i, data[i])
+            }
+            node.sendPacket(parseInt(universe))
+        }
+
+        node.setWithBuckets = function (universe, buckets) {
+            for (i=0; i < buckets.length; i++) {
+                node.set(parseInt(universe), buckets[i].channel, buckets[i].value)
+            }
+            node.sendPacket(parseInt(universe))
         }
         
         node.setChannelValue = function (universe, channel, value) {
-            node.set(universe, channel, value)
-            node.sendPacket(universe)
+            node.set(parseInt(universe), parseInt(channel), parseInt(value))
+            node.sendPacket(parseInt(universe))
         }
         
         node.savePacketToContext = function () {
