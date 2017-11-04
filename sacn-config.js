@@ -36,7 +36,7 @@ module.exports = function(RED) {
 
         node.setWithBuckets = function (universe, buckets) {
             for (i=0; i < buckets.length; i++) {
-                node.set(parseInt(universe), buckets[i].channel, buckets[i].value)
+                node.set(parseInt(universe, buckets[i].channel, buckets[i].value))
             }
             node.sendPacket(parseInt(universe))
         }
