@@ -1,13 +1,13 @@
 module.exports = function (RED) {
     function sACN(config) {
         RED.nodes.createNode(this, config)
-        let node = this
+        var node = this
         node.server = RED.nodes.getNode(config.server)
 
         node.on("input", function (msg) {
             if(node.server) {
-                let topic = msg.topic.split("/",2)
-                let payload = {}
+                var topic = msg.topic.split("/",2) || ""
+                var payload = {}
                 
                 payload.universe = msg.payload.universe || config.universe || parseInt(topic[0]) || 0
                 if (config.universe && !topic[1]) {
@@ -15,15 +15,19 @@ module.exports = function (RED) {
                 } else {
                     payload.channel = msg.payload.channel || config.channel || parseInt(topic[1]) || 0
                 }
-
-                if(Array.isArray(msg.payload.data)) {
-                    payload.offset = msg.payload.offset || payload.channel
-                    node.server.setWithArray(payload.universe, payload.offset, msg.payload.data)
-                } else if(Array.isArray(msg.payload.buckets)) {
-                    node.server.setWithBuckets(payload.universe, msg.payload.buckets)
+                payload.transition = msg.payload.transition || config.transition || "instant"
+                if (payload.transition === "instant") {
+                    payload.transition = ["instant",0]
+                } else if (payload.transition === "rate") {
+                    var rate = msg.payload.transitionRate || config.transitionRate || 50
+                    payload.transition = ["rate",rate]
                 } else {
-                    node.server.setChannelValue(payload.universe, payload.channel, msg.payload)
+                    var time = msg.payload.transitionTime || config.transitionTime || 1000
+                    payload.transition = ["time",time]
                 }
+                
+                var value = parseInt(msg.payload.value) || parseInt(msg.payload) || 0
+                node.server.set(payload.universe, payload.channel, value, payload.transition)
             }
         })
     }

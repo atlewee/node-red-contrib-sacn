@@ -6,6 +6,9 @@
             server: {value:"", type:"sacn-config"},
             universe: {value: ""},
             channel: {value: ""},
+            transition: {value: "instant"},
+            transitionRate: {value: 50},
+            transitionTime: {value: 1000},
             name: {value: ""}
         },
         inputs: 1,
@@ -16,6 +19,31 @@
             let universe = this.universe == "" ? "/#" : "/"+this.universe
             let channel = this.channel == "" ? "/#" : "/"+this.channel
             return this.name || "sACN" + universe + channel
+        },
+        oneditprepare: function() {
+            $("#transition-rate-row").hide();
+            $("#transition-time-row").hide();
+            $("#node-input-transition").change(function() {
+                if ($("#node-input-transition").val() === 'instant') {
+                    $("#transition-rate-row").hide();
+                    $("#transition-time-row").hide();
+                }
+                else if ($("#node-input-transition").val() === 'rate') {
+                    $("#transition-rate-row").show();
+                    $("#transition-time-row").hide();
+                } else {
+                    $("#transition-rate-row").hide();
+                    $("#transition-time-row").show();
+                }
+            });
+            if (this.transition === 'instant') {
+                $("#node-input-transition").val('instant').change();
+            }
+            else if (this.transition === 'rate') {
+                $("#node-input-transition").val('rate').change();
+            } else {
+                $("#node-input-transition").val('time').change();
+            }
         }
     })
 </script>
@@ -32,6 +60,22 @@
     <div class="form-row">
             <label for="node-input-channel"><i class="fa fa-bookmark"></i> Channel </label>
             <input type="text" id="node-input-channel" placeholder="Channel">
+    </div>
+    <div class="form-row">
+        <label for="node-input-transition"><i class="fa fa-bookmark"></i> Transition </label>
+        <select id="node-input-transition">
+            <option value="instant"> Instant </option>
+            <option value="rate"> Fixed Rate </option>
+            <option value="time"> Fixed Time </option>
+        </select>
+    </div>
+    <div class="form-row" id="transition-rate-row">
+        <label for="node-input-rate">StepTime(ms)</label>
+        <input type="text" id="node-input-transitionRate">
+    </div>
+    <div class="form-row" id="transition-time-row">
+        <label for="node-input-transition-time">Duration(ms)</label>
+        <input type="text" id="node-input-transitionTime">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name </label>
