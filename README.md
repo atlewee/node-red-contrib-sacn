@@ -37,8 +37,8 @@ msg.payload = {
 msg.payload = {
     "universe": 1,
     "channel": 1,
-    "value": 10
-    "transition": "time"
+    "value": 10,
+    "transition": "time",
     "transitionTime": 1000   //1000ms for total transition.
 }
 
