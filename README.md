@@ -20,26 +20,26 @@ msg.payload = 0
 
 // Universe and channel sent as an object will override anything provided in topic or node-config:
 msg.payload = {
-    universe = 1,
-    channel = 1,
-    value = 0
+    "universe": 1,
+    "channel": 1,
+    "value": 0
 }
 
 
 // Transition can be set in config. Overidden when sent as object.
 msg.topic = "1"  // (string: Channel)
 msg.payload = {
-    value = 10,
-    transition = "rate",
-    transitionRate = 50,   //50ms for each step. Value going from 0 to 10 will result in 10x50ms. Total transition = 500ms.
+    "value": 10,
+    "transition": "rate",
+    "transitionRate": 50,   //50ms for each step. Value going from 0 to 10 will result in 10x50ms. Total transition = 500ms.
 }
 
 msg.payload = {
-    universe = 1,
-    channel = 1,
-    value = 10
-    transition = "time"
-    transitionTime = 1000   //1000ms for total transition.
+    "universe": 1,
+    "channel": 1,
+    "value": 10
+    "transition": "time"
+    "transitionTime": 1000   //1000ms for total transition.
 }
 
 
