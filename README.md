@@ -24,48 +24,28 @@ msg.payload = {
     channel = 1,
     value = 0
 }
-```
 
-### Set with array
 
-```
+// Transition can be set in config. Overidden when sent as object.
+msg.topic = "1"  // (string: Channel)
 msg.payload = {
-  data: [0, 0, ...] // [int]: DMX data, length <= 512
-};
-// Universe can also be set in topic or in object just like single value above.
-```
+    value = 10,
+    transition = "rate",
+    transitionRate = 50,   //50ms for each step. Value going from 0 to 10 will result in 10x50ms. Total transition = 500ms.
+}
 
-
-### Set with array and offset
-
-```
 msg.payload = {
-  data: [0, ...], // [int]: DMX data, data.length <= 512
-  offset: 0       // int: offset (first DMX channel in the array)
-};
+    universe = 1,
+    channel = 1,
+    value = 10
+    transition = "time"
+    transitionTime = 1000   //1000ms for total transition.
+}
 
-// Offset can also be set in the topic:
-msg.topic = "1/10"
-msg.payload = {
-  data: [10, 20, 30] // [int]: DMX data, length <= 512
-};
-// This results in channel 10=10, 11=20, 12=30
+
+// It makes most sense to use "rate" because you probably don't want to // use 1 second going from value 50 to 49.
+// Default transition value is "instant"
 ```
 
-
-### set with multiple values
-
-```
-msg.payload = {
-  buckets: [
-    {channel: 0, value: 255},
-    {channel: 4, value: 0},
-    ...
-  ]
-};
-```
 
 Package is currently in rapid development, I will bump to 1.0.0 when considered ready for production use.
-
-Todo:
-- Fading/Transition
