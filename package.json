@@ -1,14 +1,14 @@
 {
   "name": "node-red-contrib-sacn",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "sACN for NodeRed",
-  "dependencies"  : {
+  "dependencies": {
     "e131": "1.1.1"
   },
-  "node-red"      : {
-    "nodes"     : {
-        "sacn": "sacn.js",
-        "sacn-config": "sacn-config.js"
+  "node-red": {
+    "nodes": {
+      "sacn": "sacn.js",
+      "sacn-config": "sacn-config.js"
     }
   },
   "repository": {

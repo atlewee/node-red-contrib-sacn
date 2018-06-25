@@ -47,5 +47,12 @@ msg.payload = {
 // Default transition value is "instant"
 ```
 
+### set full universe (Json array of up to 512 values)
+```
+// Set Universe in config or topic:
+msg.topic = "1/1" // (string: Universe/Channel)
+msg.payload = [128,0,128] // (array: First 3 DMX values in the universe set to 50%,0%,50%)
+```
+
 
 Package is currently in rapid development, I will bump to 1.0.0 when considered ready for production use.

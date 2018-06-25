@@ -28,6 +28,14 @@ module.exports = function(RED) {
             slotsData[channel-1] = value
             node.packet[universe].setSlotsData(slotsData)
         }
+
+        node.setChannels = function (universe, values) {
+            var slotsData = node.getUniverse(universe)
+            for (i = 0; i < values.length; i++) {
+                slotsData[i] = values[i]
+            }
+            node.packet[universe].setSlotsData(slotsData)
+        }
         
         node.sendPacket = function (universe) {
             node.client.send(node.packet[universe])
@@ -67,6 +75,11 @@ module.exports = function(RED) {
                 node.setChannel(parseInt(universe), parseInt(channel), parseInt(value))
                 node.sendPacket(parseInt(universe))
             }
+        }
+
+        node.setArray = function (universe, values) {
+            node.setChannels(parseInt(universe), values)
+            node.sendPacket(parseInt(universe))
         }
         
         node.savePacketToContext = function () {

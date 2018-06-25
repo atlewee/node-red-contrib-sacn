@@ -25,9 +25,12 @@ module.exports = function (RED) {
                     var time = msg.payload.transitionTime || config.transitionTime || 1000
                     payload.transition = ["time",time]
                 }
-                
-                var value = parseInt(msg.payload.value) || parseInt(msg.payload) || 0
-                node.server.set(payload.universe, payload.channel, value, payload.transition)
+                if (Array.isArray(msg.payload)) {
+                    node.server.setArray(payload.universe, msg.payload)
+                } else {
+                    var value = parseInt(msg.payload.value) || parseInt(msg.payload) || 0
+                    node.server.set(payload.universe, payload.channel, value, payload.transition)
+                }
             }
         })
     }
