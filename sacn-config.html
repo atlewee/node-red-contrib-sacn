@@ -2,19 +2,19 @@
     RED.nodes.registerType('sacn-config',{
         category: 'config',
         defaults: {
-            host: {value:"localhost",required:true},
+            hostOrUniverse: {value:"localhost"},
             port: {value:5568,required:true,validate:RED.validators.number()},
         },
         label: function() {
-            return this.host+":"+this.port;
+            return this.hostOrUniverse+":"+this.port;
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="sacn-config">
     <div class="form-row">
-        <label for="node-config-input-host"><i class="icon-bookmark"></i> Host</label>
-        <input type="text" id="node-config-input-host">
+        <label for="node-config-input-hostOrUniverse"><i class="icon-bookmark"></i> Host/IP(Unicast) <--OR--> Universe(Multicast) </label>
+        <input type="text" id="node-config-input-hostOrUniverse">
     </div>
     <div class="form-row">
         <label for="node-config-input-port"><i class="icon-bookmark"></i> Port</label>

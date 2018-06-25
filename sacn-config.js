@@ -4,11 +4,15 @@ module.exports = function(RED) {
     function sACNConfigNode(n) {
         RED.nodes.createNode(this,n);
         var node = this
-        node.host = n.host;
+        node.hostOrUniverse = n.hostOrUniverse;
         node.port = n.port;
-
         node.flowContext = node.context().global
-        node.client = new e131.Client(node.host,[node.port])
+        var hostOrUniverseHex = 
+            Number.isInteger(Number(node.hostOrUniverse))
+                ? Number(node.hostOrUniverse)
+                : node.hostOrUniverse
+        node.client = new e131.Client(hostOrUniverseHex,[node.port])
+
         node.packet = node.flowContext.get("packet") || []
 
         node.getUniverse = function (universe) {
