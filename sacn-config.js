@@ -33,10 +33,10 @@ module.exports = function (RED) {
             node.packet[universe].setSlotsData(slotsData)
         }
 
-        node.setChannels = function (universe, values) {
+        node.setChannels = function (universe, channel, values) {
             var slotsData = node.getUniverse(universe)
             for (i = 0; i < values.length; i++) {
-                slotsData[i] = values[i]
+                slotsData[channel - 1 + i] = values[i]
             }
             node.packet[universe].setSlotsData(slotsData)
         }
@@ -80,8 +80,8 @@ module.exports = function (RED) {
             }
         }
 
-        node.setArray = function (universe, values) {
-            node.setChannels(parseInt(universe), values)
+        node.setArray = function (universe, channel, values) {
+            node.setChannels(parseInt(universe), parseInt(channel), values)
             node.sendPacket(parseInt(universe))
         }
 

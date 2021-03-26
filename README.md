@@ -52,4 +52,8 @@ msg.payload = {
 // Set Universe in config or topic:
 msg.topic = "1/1" // (string: Universe/Channel)
 msg.payload = [128,0,128] // (array: First 3 DMX values in the universe set to 50%,0%,50%)
+
+// More generically, set channels X -> (X+msg.payload.length-1)
+msg.topic = "1/X" // (string: Universe/Channel)
+msg.payload = [128,0,128,...,N]
 ```

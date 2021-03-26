@@ -27,7 +27,7 @@ module.exports = function (RED) {
                     payload.transition = ["time", time]
                 }
                 if (Array.isArray(msg.payload)) {
-                    node.server.setArray(payload.universe, msg.payload)
+                    node.server.setArray(payload.universe, payload.channel, msg.payload)
                 } else {
                     var value = parseInt(msg.payload.value) || parseInt(msg.payload) || 0
                     node.server.set(payload.universe, payload.channel, value, payload.transition)
